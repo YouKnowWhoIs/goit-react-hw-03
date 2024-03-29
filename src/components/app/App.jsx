@@ -1,20 +1,30 @@
-// import { useState } from "react";
-// import { ContactForm } from "../contactForm/contactForm.jsx";
-// import { SearchBox } from "../searchBox/searchBox.jsx";
+import { useState } from "react";
+import { ContactForm } from "../contactForm/contactForm.jsx";
+import { SearchBox } from "../searchBox/searchBox.jsx";
 import { ContactList } from "../contactList/contactList.jsx";
-import "./App.css";
-import contact from "./contact.json";
+import initialContacts from "./contacts.json";
 
 function App() {
-  // const [count, setCount] = useState(0);
+  const [searchValue, setsearchValue] = useState("");
+
+  const [contacts, setContacts] = useState(initialContacts);
+
+  const handleChangeSearch = (event) => {
+    console.log("work");
+    setsearchValue(() => event.target.value);
+  };
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <>
       <div>
         <h1>Phonebook</h1>
-        {/* <ContactForm /> */}
-        {/* <SearchBox /> */}
-        <ContactList contact={contact} />
+        <ContactForm />
+        <SearchBox value={searchValue} onChange={handleChangeSearch} />
+        <ContactList filteredContacts={filteredContacts} />
       </div>
     </>
   );

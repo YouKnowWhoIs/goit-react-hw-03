@@ -1,0 +1,19 @@
+.contact-form {
+  border: 2px solid #111;
+  border-radius: 5px;
+  margin: 7px;
+  padding: 15px 10px 15px 10px;
+  width: 330px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-add-contact {
+  /* display: flex; */
+}
+
+.button-add-contact {
+  width: 100px;
+  padding: 5px;
+}

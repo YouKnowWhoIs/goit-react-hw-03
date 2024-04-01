@@ -14,14 +14,14 @@ export const ContactForm = ({ onAdd }) => {
   const numberId = uuidv4();
 
   const handleSumbit = (values, actions) => {
-    console.log("work", values);
+    // console.log("work", values);
     const newContact = {
       ...values,
       id: uuidv4(),
       name: values.name.trim(),
     };
     onAdd(newContact);
-    console.log(newContact);
+    // console.log(newContact);
     actions.resetForm();
   };
 

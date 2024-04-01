@@ -1,11 +1,26 @@
-export const ContactList = ({ name, number, id, onDelete }) => {
+export const ContactList = ({ onDelete, contacts, searchValue }) => {
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
-    <li className="contact-name">
-      <p>{name}</p>
-      <p>{number}</p>
-      <button className="contact-delete" onClick={() => onDelete(id)}>
-        Delete
-      </button>
-    </li>
+    <ul>
+      {filteredContacts.length > 0 ? (
+        filteredContacts.map((contact) => (
+          <li key={contact.id} className="contact-name">
+            <p>{contact.name}</p>
+            <p>{contact.number}</p>
+            <button
+              className="contact-delete"
+              onClick={() => onDelete(contact.id)}
+            >
+              Delete
+            </button>
+          </li>
+        ))
+      ) : (
+        <p>You don`t have a contakts</p>
+      )}
+    </ul>
   );
 };

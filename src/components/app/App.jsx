@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ContactForm } from "../contactForm/contactForm.jsx";
 import { SearchBox } from "../searchBox/searchBox.jsx";
 import { ContactList } from "../contactList/contactList.jsx";
-import contacts from "./contacts.json";
+import contactsList from "./contacts.json";
 
 function App() {
   const [searchValue, setsearchValue] = useState("");
 
-  const [contact, setcontact] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+    const saveContacts = window.localStorage.getItem("saveContacts");
+    if (saveContacts !== null) {
+      return JSON.parse(saveContacts);
+    } else {
+      return contactsList;
+    }
+  });
 
   const addContact = (newTask) => {
-    setcontact((prevState) => {
+    setContacts((prevState) => {
       return [...prevState, newTask];
     });
     console.log("work newTask");
@@ -25,12 +32,16 @@ function App() {
     const index = nextContact.findIndex((contact) => contact.id === id);
     nextContact.splice(index, 1);
     console.log("work", id, index);
-    setcontact(nextContact);
+    setContacts(nextContact);
   };
 
   const filteredContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(searchValue.toLowerCase())
   );
+
+  useEffect(() => {
+    window.localStorage.setItem("saveContacts", JSON.stringify(contacts));
+  }, [contacts]);
 
   return (
     <>
@@ -50,7 +61,7 @@ function App() {
               />
             ))
           ) : (
-            <p>Loading...</p>
+            <p>You don`t have a contakts</p>
           )}
         </ul>
       </div>

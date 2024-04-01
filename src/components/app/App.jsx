@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ContactForm } from "../contactForm/contactForm.jsx";
 import { SearchBox } from "../searchBox/searchBox.jsx";
 import { ContactList } from "../contactList/contactList.jsx";
-import contact from "./contact.json";
+import contacts from "./contact.json";
 
 function App() {
   const [searchValue, setsearchValue] = useState("");
@@ -12,9 +12,13 @@ function App() {
     if (saveContacts !== null) {
       return JSON.parse(saveContacts);
     } else {
-      return contact;
+      return contacts;
     }
   });
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   const addContact = (newTask) => {
     setContacts((prevState) => {
@@ -41,16 +45,15 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="container">
         <h1>Phonebook</h1>
         <ContactForm onAdd={addContact} />
 
         <SearchBox value={searchValue} onChange={handleChangeSearch} />
 
         <ContactList
-          contacts={contacts}
           onDelete={handleOnDelete}
-          searchValue={searchValue}
+          filteredContacts={filteredContacts}
         />
       </div>
     </>

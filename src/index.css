@@ -1,6 +1,7 @@
 @import url("./components/contactList/contactList.module.css");
 @import url("./components/contactForm//contactForm.module.css");
 @import url("./components/searchBox/searchBox.module.css");
+@import url("./components/contact/contact.module.css");
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

@@ -47,10 +47,18 @@ export const ContactForm = ({ onAdd }) => {
       <Form className="contact-form">
         <label htmlFor={nameId}>Name:</label>
         <Field type="text" name="name" id={nameId} />
-        <ErrorMessage name="name" component="p" />
+        <ErrorMessage
+          className="error-message-form"
+          name="name"
+          component="p"
+        />
         <label htmlFor={numberId}>Number:</label>
         <Field type="number" name="number" id={numberId} />
-        <ErrorMessage name="number" component="p" />
+        <ErrorMessage
+          className="error-message-form"
+          name="number"
+          component="p"
+        />
 
         <button type="submit" className="button-add-contact">
           Add contant

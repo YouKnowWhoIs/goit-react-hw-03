@@ -9,11 +9,11 @@
   gap: 10px;
 }
 
-.form-add-contact {
-  /* display: flex; */
-}
-
 .button-add-contact {
   width: 100px;
   padding: 5px;
+}
+
+.error-message-form {
+  color: red;
 }

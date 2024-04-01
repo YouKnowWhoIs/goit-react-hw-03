@@ -2,16 +2,26 @@ import { useState } from "react";
 import { ContactForm } from "../contactForm/contactForm.jsx";
 import { SearchBox } from "../searchBox/searchBox.jsx";
 import { ContactList } from "../contactList/contactList.jsx";
-import initialContacts from "./contacts.json";
+import contacts from "./contacts.json";
 
 function App() {
   const [searchValue, setsearchValue] = useState("");
 
-  const [contacts, setContacts] = useState(initialContacts);
+  const [task, setTask] = useState([]);
+
+  const addContact = (newTask) => {
+    setTask((prevState) => {
+      return [...prevState, newTask];
+    });
+    console.log("work newTask");
+  };
 
   const handleChangeSearch = (event) => {
-    console.log("work");
-    setsearchValue(() => event.target.value);
+    setsearchValue(event.target.value);
+  };
+
+  const handleOnDelete = (id) => {
+    console.log("work", id);
   };
 
   const filteredContacts = contacts.filter((contact) =>
@@ -22,9 +32,12 @@ function App() {
     <>
       <div>
         <h1>Phonebook</h1>
-        <ContactForm />
+        <ContactForm onAdd={addContact} />
         <SearchBox value={searchValue} onChange={handleChangeSearch} />
-        <ContactList filteredContacts={filteredContacts} />
+        <ContactList
+          filteredContacts={filteredContacts}
+          onDelete={handleOnDelete}
+        />
       </div>
     </>
   );

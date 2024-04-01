@@ -1,10 +1,16 @@
 // import { useState } from "react";
 
-export const SearchBox = () => {
+export const SearchBox = ({ value, onChange }) => {
   return (
     <div className="search-box-conteiner">
       <p>Find contacts by name</p>
-      <input type="text" placeholder="Search..." className="search-box-input" />
+      <input
+        value={value}
+        onChange={onChange}
+        type="text"
+        placeholder="Search..."
+        className="search-box-input"
+      />
     </div>
   );
 };
